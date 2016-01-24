@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Audit</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+<script>
+    var myApp = angular.module('myApp', []);
+    // For Component users, it should look like this:
+    // var myApp = angular.module('myApp', [require('angular-ui-router')]);
+
+    myApp.controller('reports', function($scope){
+        $scope.reports = [];
+        $scope.addReport = function(){
+            $scope.reports.push($scope.name);
+        }
+    });
+</script>
+<body ng-controller="reports">
+<ul>
+    <li ng-repeat="report in reports"> {{ report }}</li>
+</ul>
+<div class="fields" >
+    <input ng-model="name">
+    <input type="file" accept="image/*">
+    <button ng-click="addReport()">Save</button>
+</div>
+</body>
+</html>
