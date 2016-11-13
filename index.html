@@ -1,62 +1,83 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Audit</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw=="
-          crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    <style>
+        #actionTaken table {
+            padding: 1em;
+            margin: 1em;
+            margin-left: 0;
+            font-size: 1.3em;
+        }
+        
+        #actionTaken table td {
+            padding: 0.5em;
+        }
+    </style>
+    <script src="js/localforage.js"></script>
+
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
-<script src="js/localforage.js"></script>
-<script>
-    var myApp = angular.module('myApp', []);
-    // For Component users, it should look like this:
-    // var myApp = angular.module('myApp', [require('angular-ui-router')]);
 
-    myApp.controller('reports', function ($scope) {
-
-        localforage.getItem('reports').then(function (reports) {
-            if (reports === null) {
-                $scope.reports = [];
-            } else {
-                reports.forEach(report => report.currentURL = getImageSrc(report.blob));
-                $scope.reports = reports;
-                $scope.$apply();
-            }
-        });
-
-        $scope.addReport = function () {
-            var image = getUploadedFileAsImage();
-            $scope.reports.push({blob: image, currentURL: getImageSrc(image)});
-            localforage.setItem('reports', $scope.reports);
-        };
-
-        $scope.delete = function (index) {
-            $scope.reports.splice(index, 1);
-            localforage.setItem('reports', $scope.reports)
-        };
-
-        function getUploadedFileAsImage() {
-            return new Blob([document.querySelector('#image').files[0]]);
-        }
-
-        var getImageSrc = function (blob) {
-            return window.URL.createObjectURL(blob);
-        }
-
-    });
-</script>
-<body ng-controller="reports">
-<ul>
-    <li ng-repeat="report in reports"><img src="{{ report.currentURL }}"/>
-        <button ng-click="delete($index)" class="btn btn-danger">x</button>
-    </li>
-</ul>
-<div class="fields">
-    <input ng-model="name">
-    <input type="file" id="image" accept="image/*">
-    <button ng-click="addReport()" class="btn">Save</button>
-</div>
+<body>
+    <div class="container-fluid">
+        <input type="file" id="image" accept="image/*">
+            Add Picture
+        </input>
+        <div>
+            <h3>Item Number</h3>
+            <input type="number">
+        </div>
+        <div id="issue">
+            <h3>Issue</h3>
+            <textarea></textarea>
+        </div>
+        <div id="category">
+            <h3>Category</h3>
+            <select>
+                <option>Something</option>
+                <option>Something Else</option>
+            </select>
+        </div>
+        <div id="location">
+            <h3>Location</h3>
+            <input type="text">
+        </div>
+        <div id="observations">
+            <h3>Observations</h3>
+            <textarea></textarea>
+        </div>
+        <div id="actionRequired">
+            <h3>Action Required</h3>
+            <textarea></textarea>
+        </div>
+        <div id="allocatedTo">
+            <h3>Allocated To</h3>
+            <input type="text">
+        </div>
+        <div id="actionTaken">
+            <h3>Actions Taken</h3>
+            <table class="table-bordered">
+                <thead>
+                    <td>Action Taken</td>
+                    <td>Date</td>
+                    <td></td>
+                </thead>
+                <tr class="info">
+                    <td>There are currently no actions</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <input type="text" placeholder="Action Taken">
+            <input type="date">
+            <button class="btn btn-secondary">Add</button>
+        </div>
+    </div>
 </body>
+
 </html>

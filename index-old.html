@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Audit</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw=="
+          crossorigin="anonymous">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+<script src="js/localforage.js"></script>
+<script>
+    var myApp = angular.module('myApp', []);
+    // For Component users, it should look like this:
+    // var myApp = angular.module('myApp', [require('angular-ui-router')]);
+
+    myApp.controller('reports', function ($scope) {
+
+        localforage.getItem('reports').then(function (reports) {
+            if (reports === null) {
+                $scope.reports = [];
+            } else {
+                reports.forEach(report => report.currentURL = getImageSrc(report.blob));
+                $scope.reports = reports;
+                $scope.$apply();
+            }
+        });
+
+        $scope.addReport = function () {
+            var image = getUploadedFileAsImage();
+            $scope.reports.push({blob: image, currentURL: getImageSrc(image)});
+            localforage.setItem('reports', $scope.reports);
+        };
+
+        $scope.delete = function (index) {
+            $scope.reports.splice(index, 1);
+            localforage.setItem('reports', $scope.reports)
+        };
+
+        function getUploadedFileAsImage() {
+            return new Blob([document.querySelector('#image').files[0]]);
+        }
+
+        var getImageSrc = function (blob) {
+            return window.URL.createObjectURL(blob);
+        }
+
+    });
+</script>
+<body ng-controller="reports">
+<ul>
+    <li ng-repeat="report in reports"><img src="{{ report.currentURL }}"/>
+        <button ng-click="delete($index)" class="btn btn-danger">x</button>
+    </li>
+</ul>
+<div class="fields">
+    <input ng-model="name">
+    <input type="file" id="image" accept="image/*">
+    <button ng-click="addReport()" class="btn">Save</button>
+</div>
+</body>
+</html>
