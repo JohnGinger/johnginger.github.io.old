@@ -31,6 +31,15 @@
         function addPicture(){
             document.querySelector("#image").click();
         }
+
+        function addPicture(){
+            const imageUrl = getImageSrc(new Blob([document.querySelector('#image').files[0]]));
+            document.querySelector(".add-picture .image-area").src = imageUrl;
+        }
+
+        var getImageSrc = function (blob) {
+            return window.URL.createObjectURL(blob);
+        }
     </script>
 </head>
 
@@ -41,8 +50,9 @@
         <div class="add-picture">
             <button class="btn btn-primary" onclick="addPicture()">
             Add a picture
-        </button>
-            <input type="file" id="image" accept="image/*" />
+            </button>
+            <img class="image-area" />
+            <input type="file" id="image" accept="image/*" onchange="addPicture()" />
         </div>
         <div>
             <h3>Item Number</h3>
