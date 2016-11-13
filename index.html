@@ -17,11 +17,13 @@
         #actionTaken table td {
             padding: 0.5em;
         }
+        
         #image {
             opacity: 0;
         }
-        .add-picture{
-            padding:1em;
+        
+        .add-picture {
+            padding: 1em;
         }
     </style>
     <script src="js/localforage.js"></script>
@@ -37,10 +39,10 @@
         <h1>Create New Report</h1>
         <hr />
         <div class="add-picture">
-        <button class="btn btn-primary" onclick="addPicture()">
+            <button class="btn btn-primary" onclick="addPicture()">
             Add a picture
         </button>
-        <input type="file" id="image" accept="image/*" />
+            <input type="file" id="image" accept="image/*" />
         </div>
         <div>
             <h3>Item Number</h3>
@@ -90,6 +92,13 @@
             <input type="text" placeholder="Action Taken">
             <input type="date">
             <button class="btn btn-secondary">Add</button>
+        </div>
+        <div id="complete">
+            <h3>Complete</h3>
+            <form>
+                <input type="radio" value="yes">YES<br>
+                <input type="radio" value="no" checked>NO<br>
+            </form>
         </div>
     </div>
 </body>
