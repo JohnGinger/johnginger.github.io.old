@@ -40,9 +40,36 @@
             margin-bottom: 1em;
         }
         
-        #complete label {
-            display: block;
-            width: 50%;
+        #complete form {
+            display: flex;
+        }
+        
+        #complete form .option {
+            flex: 1 1 auto;
+            border: 1px solid darkcyan;
+            text-align: center;
+            position: relative;
+            height: 3em;
+        }
+        
+        #complete form label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #complete form input {
+            opacity: 0;
+        }
+        
+        #complete form input:checked + label {
+            background-color: lightgreen;
         }
     </style>
     <script src="js/localforage.js"></script>
@@ -125,10 +152,19 @@
         <div id="complete">
             <h3>Complete</h3>
             <form>
-                <label>YES<input type="radio" value="yes" name="complete"></label>
-                <label>NO<input type="radio" value="no" checked name="complete"></label>
+                <div class="option">
+                    <input type="radio" value="yes" name="complete" id="yes">
+                    <label for="yes">YES</label>
+                </div>
+                <div class="option">
+                    <input type="radio" value="no" checked name="complete" id="no">
+                    <label for="no">NO</label>
+                </div>
             </form>
         </div>
+        <hr>
+        <button class="btn btn-primary">Save</button>
+        <hr>
     </div>
 </body>
 
