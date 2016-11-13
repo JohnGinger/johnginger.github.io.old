@@ -22,6 +22,15 @@
             opacity: 0;
         }
         
+        #category {
+            margin-bottom: 1em;
+        }
+        
+        input,
+        textarea {
+            width: 100%;
+        }
+        
         .add-picture {
             padding: 1em;
         }
@@ -29,6 +38,11 @@
         .add-picture .image-area {
             width: 100%;
             margin-bottom: 1em;
+        }
+        
+        #complete label {
+            display: block;
+            width: 50%;
         }
     </style>
     <script src="js/localforage.js"></script>
@@ -111,8 +125,8 @@
         <div id="complete">
             <h3>Complete</h3>
             <form>
-                <input type="radio" value="yes">YES<br>
-                <input type="radio" value="no" checked>NO<br>
+                <label>YES<input type="radio" value="yes" name="complete"></label>
+                <label>NO<input type="radio" value="no" checked name="complete"></label>
             </form>
         </div>
     </div>
