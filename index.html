@@ -17,16 +17,29 @@
         #actionTaken table td {
             padding: 0.5em;
         }
+        #image {
+            opacity: 0;
+        }
+        .add-picture{
+            padding:1em;
+        }
     </style>
     <script src="js/localforage.js"></script>
-
+    <script>
+        function addPicture(){
+            document.querySelector("#image").click();
+        }
+    </script>
 </head>
 
 <body>
     <div class="container-fluid">
-        <input type="file" id="image" accept="image/*">
-            Add Picture
-        </input>
+        <div class="add-picture">
+        <button class="btn btn-primary" onclick="addPicture()">
+            Add a picture
+        </button>
+        <input type="file" id="image" accept="image/*" />
+        </div>
         <div>
             <h3>Item Number</h3>
             <input type="number">
