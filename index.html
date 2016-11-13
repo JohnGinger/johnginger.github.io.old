@@ -25,6 +25,10 @@
         .add-picture {
             padding: 1em;
         }
+
+        .add-picture image-area{
+            width:100%;
+        }
     </style>
     <script src="js/localforage.js"></script>
     <script>
@@ -32,7 +36,7 @@
             document.querySelector("#image").click();
         }
 
-        function addPicture(){
+        function showPicture(){
             const imageUrl = getImageSrc(new Blob([document.querySelector('#image').files[0]]));
             document.querySelector(".add-picture .image-area").src = imageUrl;
         }
@@ -48,11 +52,11 @@
         <h1>Create New Report</h1>
         <hr />
         <div class="add-picture">
+            <img class="image-area" />
             <button class="btn btn-primary" onclick="addPicture()">
             Add a picture
             </button>
-            <img class="image-area" />
-            <input type="file" id="image" accept="image/*" onchange="addPicture()" />
+            <input type="file" id="image" accept="image/*" onchange="showPicture()" />
         </div>
         <div>
             <h3>Item Number</h3>
