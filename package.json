@@ -1,0 +1,32 @@
+{
+  "name": "report-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vivacitylabs/analyticity.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/vivacitylabs/analyticity/issues"
+  },
+  "homepage": "https://github.com/vivacitylabs/analyticity#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.0.0",
+    "gulp-util": "^3.0.7",
+    "knockout": "^3.4.1",
+    "localforage": "^1.4.3",
+    "minifyify": "^7.3.4",
+    "watchify": "^3.7.0"
+  }
+}

@@ -1,81 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style>
-        #actionTaken table {
-            padding: 1em;
-            margin: 1em;
-            margin-left: 0;
-            font-size: 1.3em;
-        }
-        
-        #actionTaken table td {
-            padding: 0.5em;
-        }
-        
-        #image {
-            opacity: 0;
-        }
-        
-        #category {
-            margin-bottom: 1em;
-        }
-        
-        input,
-        textarea {
-            width: 100%;
-        }
-        
-        .add-picture {
-            padding: 1em;
-        }
-        
-        .add-picture .image-area {
-            width: 100%;
-            margin-bottom: 1em;
-        }
-        
-        #complete form {
-            display: flex;
-        }
-        
-        #complete form .option {
-            flex: 1 1 auto;
-            border: 1px solid darkcyan;
-            text-align: center;
-            position: relative;
-            height: 3em;
-        }
-        
-        #complete form label {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        #complete form input {
-            opacity: 0;
-        }
-        
-        #complete form input:checked + label {
-            background-color: lightgreen;
-        }
-    </style>
-    <script src="js/localforage.js"></script>
+    <link rel="stylesheet" href="output/css/app.css">
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div data-bind="click: function() {state('home')}, visible: state() !== 'home'" class="back-button">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+    </div>
+    <div class="container-fluid home" data-bind="visible: state() === 'home'">
+        <h1>Report Maker</h1>
+        <hr />
+        <button class="btn btn-primary" data-bind="click: function() {state('report')}">Add new Report</button>
+        <button class="btn btn-primary" data-bind="click: function() {state('existingReports')">See existing reports</button>
+    </div>
+    <div class="container-fluid existing-reports" data-bind="visible: state() === 'existingReports'">
+        <h1>List of reports</h1>
+        <hr />
+        <table class="table">
+            <thead>
+                    <tr>
+                    <th>Title</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: reports">
+                <tr>
+                    <td data-bind="text: title"></td>
+                    <td><button class="btn btn-primary" data-bind="click: loadReport()">Go to report</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container-fluid new-report" data-bind="visible: state() === 'report'">
         <h1>Create New Report</h1>
         <hr />
         <div class="add-picture">
@@ -148,10 +108,11 @@
             </form>
         </div>
         <hr>
-        <button class="btn btn-primary">Save</button>
+        <button class="btn btn-primary" data-bind="click: saveReport">Save</button>
+        <button class="btn btn-danger" data-bind="click: function() {state('home')}">Cancel</button>
         <hr>
     </div>
-    <script src="app.js"></script>
+    <script src="output/js/index.js"></script>
 </body>
 
 </html>
