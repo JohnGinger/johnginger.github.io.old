@@ -1,0 +1,16 @@
+<h1>List of reports</h1>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: reports">
+        <tr>
+            <td data-bind="text: issue"></td>
+            <td><button class="btn btn-primary" data-bind="click: $parent.loadReport">Go to report</button></td>
+            <td><a href="#" data-bind="click: $parent.removeReport">Remove</a></td>
+        </tr>
+    </tbody>
+</table>

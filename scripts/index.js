@@ -18,52 +18,31 @@
 } */
 const localforage = require('localforage');
 const ko = require('knockout');
-const reports = ko.observableArray([]);
+
 let state = ko.observable('home');
+let currentReportId = ko.observable();
 
-let saveReport = function () {
-    localforage.getItem('reports').then(function (res) {
-        if (!res) {
-            res = [];
-        }   
-        let reports = res;
-        res.push({
-            title: "New name"
-        });
-        localforage.setItem('reports', reports).then(() => {
-            state('existingReports');
-        });
-    })
-}
+ko.components.register('main-menu', {
+    viewModel: require('../components/main-menu/viewModel'),
+    template: require('fs').readFileSync(__dirname + '/../components/main-menu/template.html', 'utf8')
+});
 
-let showReports = () => {
-    state('existingReports');
-    localforage.getItem('reports').then((res) => {
-        reports(res)
-    })
-}
+ko.components.register('edit-categories', {
+    viewModel: require('../components/edit-categories/viewModel'),
+    template: require('fs').readFileSync(__dirname + '/../components/edit-categories/template.html', 'utf8')
+});
 
-let loadReport = () => {
-    state('report');
-}
+ko.components.register('existing-reports', {
+    viewModel: require('../components/existing-reports/viewModel'),
+    template: require('fs').readFileSync(__dirname + '/../components/existing-reports/template.html', 'utf8')
+});
+
+ko.components.register('report-details', {
+    viewModel: require('../components/report-details/viewModel'),
+    template: require('fs').readFileSync(__dirname + '/../components/report-details/template.html', 'utf8')
+});
 
 ko.applyBindings({
     state,
-    reports,
-    saveReport,
-    loadReport,
-    showReports
+    currentReportId
 });
-
-function addPicture() {
-    document.querySelector("        #image").click();
-}
-
-function showPicture() {
-    const imageUrl = getImageSrc(new Blob([document.querySelector('#image').files[0]]));
-    document.querySelector(".add-picture .image-area").src = imageUrl;
-}
-
-var getImageSrc = function (blob) {
-    return window.URL.createObjectURL(blob);
-}

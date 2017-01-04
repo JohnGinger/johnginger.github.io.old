@@ -21,6 +21,7 @@ var browserified = function (filename) {
     b.transform("babelify", { presets: ["es2015"] });
 
     //b.plugin('minifyify', { map: fileEnd + '.map', output: "./output/js/" + fileEnd + ".map" });
+    b.transform('brfs');
     b.plugin(watchify);
     b.on('update', function (ids) { bundle(filename, ids) });
     bundle(filename);

@@ -1,0 +1,11 @@
+<h1>List of categories</h1>
+<hr />
+<ul data-bind="foreach: categories">
+    <li>
+        <span data-bind="text: name"></span>
+        <a href="#" data-bind="click: $parent.removeCategory">Remove</a>
+    </li>
+</ul>
+
+<input type="text" data-bind="value: newCategory" placeholder="Enter new category here"/>
+<button class="btn" data-bind="click: addCategory">Add</button>

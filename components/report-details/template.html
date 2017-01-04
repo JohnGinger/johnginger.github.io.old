@@ -1,0 +1,77 @@
+<h1>Create New Report</h1>
+<hr />
+<div class="add-picture">
+    <img class="image-area" />
+    <button class="btn btn-primary" data-bind="click:addPicture">
+            Add a picture
+            </button>
+    <input type="file" id="image" accept="image/*" data-bind="change:showPicture" />
+</div>
+<div>
+    <h3>Item Number - <span data-bind="text: number"></span></h3>
+</div>
+<div id="issue">
+    <h3>Issue</h3>
+    <textarea data-bind="value: issue"></textarea>
+</div>
+<div id="category">
+    <h3>Category</h3>
+    <select data-bind="foreach:categories, value: category" >
+        <option data-bind="text: name, value: id"></option>
+    </select>
+</div>
+<div id="location">
+    <h3>Location</h3>
+    <input type="text" data-bind="value: location">
+</div>
+<div id="observations">
+    <h3>Observations</h3>
+    <textarea data-bind="value: observations"></textarea>
+</div>
+<div id="actionRequired">
+    <h3>Action Required</h3>
+    <textarea data-bind="value: actionRequired"></textarea>
+</div>
+<div id="allocatedTo">
+    <h3>Allocated To</h3>
+    <input type="text" data-bind="value: allocatedTo">
+</div>
+
+<div id="actionTaken">
+    <h3>Actions Taken</h3>
+    <table class="table-bordered">
+        <thead>
+            <td>Action Taken</td>
+            <td>Date</td>
+            <td></td>
+        </thead>
+        <tr class="info">
+            <td>There are currently no actions</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <input type="text" placeholder="Action Taken">
+    <input type="date">
+    <button class="btn btn-secondary">Add</button>
+</div>
+
+<div id="complete">
+    <h3>Complete</h3>
+    <form data-bind="value: complete">
+        <div class="option", >
+            <input type="radio" value="yes" name="complete" id="yes">
+            <label for="yes">YES</label>
+        </div>
+        <div class="option">
+            <input type="radio" value="no" checked name="complete" id="no">
+            <label for="no">NO</label>
+        </div>
+    </form>
+</div>
+
+<hr>
+<button class="btn btn-primary" data-bind="click: saveReport">Save</button>
+<button class="btn btn-danger" data-bind="click: closeWithoutSaving">Cancel</button>
+<hr>
+</div>

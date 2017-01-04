@@ -12,106 +12,15 @@
     <div data-bind="click: function() {state('home')}, visible: state() !== 'home'" class="back-button">
         <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
     </div>
-    <div class="container-fluid home" data-bind="visible: state() === 'home'">
-        <h1>Report Maker</h1>
-        <hr />
-        <button class="btn btn-primary" data-bind="click: function() {state('report')}">Add new Report</button>
-        <button class="btn btn-primary" data-bind="click: function() {state('existingReports')">See existing reports</button>
-    </div>
-    <div class="container-fluid existing-reports" data-bind="visible: state() === 'existingReports'">
-        <h1>List of reports</h1>
-        <hr />
-        <table class="table">
-            <thead>
-                    <tr>
-                    <th>Title</th>
-                </tr>
-            </thead>
-            <tbody data-bind="foreach: reports">
-                <tr>
-                    <td data-bind="text: title"></td>
-                    <td><button class="btn btn-primary" data-bind="click: loadReport()">Go to report</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="container-fluid new-report" data-bind="visible: state() === 'report'">
-        <h1>Create New Report</h1>
-        <hr />
-        <div class="add-picture">
-            <img class="image-area" />
-            <button class="btn btn-primary" onclick="addPicture()">
-            Add a picture
-            </button>
-            <input type="file" id="image" accept="image/*" onchange="showPicture()" />
-        </div>
-        <div>
-            <h3>Item Number</h3>
-            <input type="number">
-        </div>
-        <div id="issue">
-            <h3>Issue</h3>
-            <textarea></textarea>
-        </div>
-        <div id="category">
-            <h3>Category</h3>
-            <select>
-                <option>Something</option>
-                <option>Something Else</option>
-            </select>
-        </div>
-        <div id="location">
-            <h3>Location</h3>
-            <input type="text">
-        </div>
-        <div id="observations">
-            <h3>Observations</h3>
-            <textarea></textarea>
-        </div>
-        <div id="actionRequired">
-            <h3>Action Required</h3>
-            <textarea></textarea>
-        </div>
-        <div id="allocatedTo">
-            <h3>Allocated To</h3>
-            <input type="text">
-        </div>
-        <div id="actionTaken">
-            <h3>Actions Taken</h3>
-            <table class="table-bordered">
-                <thead>
-                    <td>Action Taken</td>
-                    <td>Date</td>
-                    <td></td>
-                </thead>
-                <tr class="info">
-                    <td>There are currently no actions</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-            <input type="text" placeholder="Action Taken">
-            <input type="date">
-            <button class="btn btn-secondary">Add</button>
-        </div>
-        <div id="complete">
-            <h3>Complete</h3>
-            <form>
-                <div class="option">
-                    <input type="radio" value="yes" name="complete" id="yes">
-                    <label for="yes">YES</label>
-                </div>
-                <div class="option">
-                    <input type="radio" value="no" checked name="complete" id="no">
-                    <label for="no">NO</label>
-                </div>
-            </form>
-        </div>
-        <hr>
-        <button class="btn btn-primary" data-bind="click: saveReport">Save</button>
-        <button class="btn btn-danger" data-bind="click: function() {state('home')}">Cancel</button>
-        <hr>
-    </div>
+
+    <main-menu class="container-fluid home" data-bind="visible: state() === 'home'" params="state: state, currentReportId: currentReportId">
+    </main-menu>
+    <existing-reports class="container-fluid existing-reports" data-bind="visible: state() === 'existingReports'" params="state: state, currentReportId: currentReportId">
+    </existing-reports>
+    <report-details class="container-fluid new-report" data-bind="visible: state() === 'report'" params="state: state, currentReportId: currentReportId">
+    </report-details>
+    <edit-categories class="container-fluid" data-bind="visible: state() === 'edit-categories'" params="state: state">
+    </edit-categories>
     <script src="output/js/index.js"></script>
 </body>
 

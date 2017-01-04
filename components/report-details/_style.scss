@@ -1,0 +1,57 @@
+report-details {
+    display:block;
+
+    #actionTaken table {
+        padding: 1em;
+        margin: 1em;
+        margin-left: 0;
+        font-size: 1.3em;
+    }
+    #actionTaken table td {
+        padding: 0.5em;
+    }
+    #image {
+        opacity: 0;
+    }
+    #category {
+        margin-bottom: 1em;
+    }
+    input,
+    textarea {
+        width: 100%;
+    }
+    .add-picture {
+        padding: 1em;
+    }
+    .add-picture .image-area {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+    #complete form {
+        display: flex;
+    }
+    #complete form .option {
+        flex: 1 1 auto;
+        border: 1px solid darkcyan;
+        text-align: center;
+        position: relative;
+        height: 3em;
+    }
+    #complete form label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #complete form input {
+        opacity: 0;
+    }
+    #complete form input:checked+label {
+        background-color: lightgreen;
+    }
+}
